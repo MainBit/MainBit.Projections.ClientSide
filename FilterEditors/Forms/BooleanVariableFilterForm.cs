@@ -55,8 +55,8 @@ namespace MainBit.Projections.ClientSide.FilterEditors.Forms
                             )
                     );
 
-                    f._Fs2._Operator.Add(new SelectListItem { Value = Convert.ToString(BooleanOperator.Equals), Text = T("Is equal to").Text });
-                    f._Fs2._Operator.Add(new SelectListItem { Value = Convert.ToString(BooleanOperator.NotEquals), Text = T("Is not equal to").Text });
+                    f._Fs1._Operator.Add(new SelectListItem { Value = Convert.ToString(BooleanOperator.Equals), Text = T("Is equal to").Text });
+                    f._Fs1._Operator.Add(new SelectListItem { Value = Convert.ToString(BooleanOperator.NotEquals), Text = T("Is not equal to").Text });
 
                     f._Fs3._ValueUndefinedOperator.Add(new SelectListItem { Value = Convert.ToString(BooleanUndefinedOperator.Any), Text = T("Any").Text });
                     f._Fs3._ValueUndefinedOperator.Add(new SelectListItem { Value = Convert.ToString(BooleanUndefinedOperator.Undefined), Text = T("Undefined").Text });

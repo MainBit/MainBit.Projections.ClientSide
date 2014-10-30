@@ -1,0 +1,30 @@
+﻿@using MainBit.Projections.ClientSide.Models.SortCriteria;
+@using MainBit.Projections.ClientSide.ViewModels;
+@{
+    ClientSideSortCriterion sortCriterion = Model.SortCriterion;
+    ClientSideSortCriterionViewModel viewModel = Model.ViewModel;
+    
+    string url = null;
+    string text = sortCriterion.DisplayName;
+    string classes = string.Empty;
+
+    if (viewModel.ApplyingEntry == null)
+    {
+        url = viewModel.Entries[0].Url; 
+    }
+    else {
+        var otherEntries = viewModel.Entries.FirstOrDefault(e => e != viewModel.ApplyingEntry);
+        if (otherEntries != null)
+        {
+            url = otherEntries.Url;
+        }
+        classes = viewModel.ApplyingEntry.Direction.ToString().ToLower();
+    }
+}
+@if (string.IsNullOrEmpty(url))
+{
+    <span>@text</span>
+}
+else {
+    <a href="@url" @if(!string.IsNullOrEmpty(classes)) { <text> class="@classes"</text> }><span>@text</span></a>
+}

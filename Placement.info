@@ -1,0 +1,12 @@
+﻿<Placement>
+	<Place Parts_ClientSideProjection_Edit="Content:5"/>
+  <Match DisplayType="Detail">
+    <Place
+      Parts_ClientSideProjectionPart_SortCriteria="Content:1"
+      Parts_ClientSideProjectionPart_Layouts="Content:2"
+      Parts_ClientSideProjectionPart_Filters="Content:3"
+      
+      />
+  </Match>
+  
+</Placement>

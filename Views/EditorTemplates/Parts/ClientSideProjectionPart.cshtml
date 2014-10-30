@@ -1,0 +1,48 @@
+﻿@model MainBit.Projections.ClientSide.ViewModels.ClientSideProjectionPartEditViewModel
+<fieldset>
+    @Html.LabelFor(m => m.QueryRecordId, T("For Query"))
+    <select id="@Html.FieldIdFor(m => m.QueryRecordId)" name="@Html.FieldNameFor(m => m.QueryRecordId)">
+        @foreach (var queryRecord in Model.QueryRecordEntries.OrderBy(x => x.Name))
+        {
+            @Html.SelectOption(Model.QueryRecordId, queryRecord.Id, queryRecord.Name)
+        }
+    </select>
+</fieldset>
+
+<fieldset>
+    <div>
+        @Html.LabelFor(m => m.Items, T("Items to display"))
+        @Html.TextBoxFor(m => m.Items, new { @class = "text small" })
+        <span class="hint">@T("The number of items to display. Enter 0 for no limit. When using pagination, this is the number of items per page.")</span>
+    </div>
+
+    <div>
+        @Html.LabelFor(m => m.Skip, T("Offset"))
+        @Html.TextBoxFor(m => m.Skip, new { @class = "text small" })
+        <span class="hint">@T("The number of items to skip (e.g., if 2 is entered, the first 2 items won't be diplayed).")</span>
+    </div>
+
+    <div>
+        @Html.LabelFor(m => m.MaxItems, T("Maximum items"))
+        @Html.TextBoxFor(m => m.MaxItems, new { @class = "text small" })
+        <span class="hint">@T("Maximum number of items which can be queried at once. Use 0 for unlimited. This is only used as a failsafe when the number of items comes from a user-provided source such as the query string.")</span>
+    </div>
+
+    <div>
+        @Html.LabelFor(m => m.PagerSuffix, T("Suffix"))
+        @Html.TextBoxFor(m => m.PagerSuffix, new { @class = "text" })
+        <span class="hint">@T("Optional. Provide a suffix to use when multiple pagers are displayed on the same page, e.g., when using multiple Projection Widgets, or to define alternates.")</span>
+    </div>
+
+    <div>
+        @Html.CheckBoxFor(m => m.DisplayPager)
+        <label class="forcheckbox" for="@Html.FieldIdFor(m => m.DisplayPager)">@T("Show pager")</label>
+        <span class="hint">@T("Check to add a pager to the list.")</span>
+    </div>
+</fieldset>
+
+<fieldset>
+    @Html.LabelFor(m => m.PresetQueryString, T("Preset query string"))
+    @Html.TextBoxFor(m => m.PresetQueryString)
+    <span class="hint">@T("Hidden part of query string that will be also used in filter query.")</span>
+</fieldset>

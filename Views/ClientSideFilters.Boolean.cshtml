@@ -1,0 +1,9 @@
+﻿@using MainBit.Projections.ClientSide.Models.Filters;
+@{
+    BooleanClientSideFilter filter = Model.Filter;
+}
+<fieldset class="client-side-filter choice">
+    <input type="checkbox" id="@(filter.Name)" name="@filter.Name" @if (filter.Value == true) { <text> checked="checked" </text>   } value="1" class="value check-box" />
+    <label for="@filter.Name" class="forcheckbox">@filter.DisplayName</label>
+    @Html.ValidationMessage(filter.Name)
+</fieldset>

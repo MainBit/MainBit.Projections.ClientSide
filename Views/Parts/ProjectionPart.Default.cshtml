@@ -1,0 +1,7 @@
+﻿@{
+    Func<IEnumerable<dynamic>> buildShapes = Model.BuildShapes;
+    var contentShapes = buildShapes();
+    var list = New.List();
+    list.AddRange(contentShapes);
+}
+@Display(list)

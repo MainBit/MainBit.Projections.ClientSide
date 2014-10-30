@@ -1,0 +1,20 @@
+﻿@using MainBit.Projections.ClientSide.Models.Filters;
+@{
+    EnumClientSideFilter filter = Model.Filter;
+}
+<fieldset class="client-side-filter enum">
+    <label class="title"><span>@filter.DisplayName</span></label>
+    <div class="content">
+        <div class="values-container">
+            @for (var i = 0; i < filter.Items.Length; i++)
+            {
+                var item = filter.Items[i];
+                <div class="value-container choice">
+                    <input data-position="@i" type="checkbox" name="@filter.Name" value="@item.Id" @(item.Selected
+                        ? "checked=\"checked\"" : "") class="value" id="@filter.Name-@item.Id" />
+                    <label for="@filter.Name-@item.Id">@T(item.DisplayValue)</label>
+                </div>
+            }
+        </div>
+    </div>
+</fieldset>

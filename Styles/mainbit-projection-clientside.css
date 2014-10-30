@@ -1,0 +1,42 @@
+﻿.slider-container {
+    position: relative;
+}
+.empty-line { /* to show a filter line outside current filtered value zone ( ) */
+    position:absolute;
+    width:100%;
+
+    height: 10px;
+    top: 10px;
+    background: yellow;
+   
+}
+.slider, .ui-slider { /* to show a zone whitch will be able for clicking by user to apply filters */
+    position: relative;
+
+    margin-right: 15px; /* width of ui-slider-handle */
+    height: 30px;
+}
+.ui-slider-range {  /* to show a filter line inside current filtered value zone ( ) */
+    position: absolute;
+    z-index: 1;
+
+    background: #9ec44e;
+    height: 10px;
+    top: 10px;
+}
+.ui-slider .ui-slider-handle { /*there are ".ui-slider .ui-slider-handle .ui-state-default" (.ui-state-hover, .ui-state-active, .ui-state-focus*) */
+    position: absolute;
+    z-index: 2;
+
+    width: 15px;
+    height: 30px;
+    background: orange;
+}
+
+/*.ui-slider.ui-slider-horizontal { }
+.ui-slider.ui-slider-vertical { }
+
+.ui-slider-handle.ui-state-default { }
+.ui-slider-handle.ui-state-focus { }
+.ui-slider-handle.ui-state-hover { }
+.ui-slider-handle.ui-state-active { }*/

@@ -1,0 +1,12 @@
+﻿@using MainBit.Projections.ClientSide.ViewModels;
+@using  Orchard.Utility.Extensions;
+@{
+    List<ClientSideLayoutViewModel> layouts = Model.Layouts;
+}
+@if (layouts.Any())
+{
+    foreach (var layout in layouts)
+    {
+        <a href="@(layout.Url)" class="@(layout.Name.HtmlClassify())">@(layout.DisplayName)</a>
+    }
+}

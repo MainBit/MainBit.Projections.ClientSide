@@ -1,0 +1,45 @@
+﻿@using MainBit.Projections.ClientSide.Models.Filters;
+@using MainBit.Projections.ClientSide.ClientSideEditors.Filters;
+@{
+    NumericClientSideFilter filter = Model.Filter;
+    decimal? step = filter.Scale != null ? (decimal?)Math.Pow(10, 0 - (double)filter.Scale.Value) : null;
+}
+<fieldset class="client-side-filter numeric">
+    <label class="title"><span>@filter.DisplayName</span></label>
+    <div class="content">
+        <div class="slider-container">
+            <div class="empty-line"></div>
+            <div class="slider"></div>
+        </div>
+        <div class="values-container">
+            <span class="value-container from">
+                <label for="@filter.GetNameFrom()">от</label> @Html.TextBox(
+                filter.GetNameFrom(),
+                filter.From.ToJsString(),
+                new
+                {
+                    @class = "value",
+                    type = "number",
+                    min = filter.Min.ToJsString(),
+                    max = filter.Max.ToJsString(),
+                    step = step.ToJsString()
+                })
+            </span>
+            <span class="value-container to">
+                <label for="@filter.GetNameTo()">до</label> @Html.TextBox(
+                filter.GetNameTo(),
+                filter.To.ToJsString(),
+                new
+                {
+                    @class = "value",
+                    type = "number",
+                    min = filter.Min.ToJsString(),
+                    max = filter.Max.ToJsString(),
+                    step = step.ToJsString()
+                })
+            </span>
+        </div>
+        @Html.ValidationMessage(filter.GetNameFrom())
+        @Html.ValidationMessage(filter.GetNameTo())
+    </div>
+</fieldset>

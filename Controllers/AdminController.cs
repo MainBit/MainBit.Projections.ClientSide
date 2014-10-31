@@ -164,23 +164,6 @@ namespace MainBit.Projections.ClientSide.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Update(int id)
-        {
-            if (!Services.Authorizer.Authorize(Permissions.ManageQueries, T("Not authorized to manage queries")))
-                return new HttpUnauthorizedResult();
-
-            var query = _queryService.GetQuery(id);
-
-            if (query == null)
-            {
-                return HttpNotFound();
-            }
-
-            _avaliableValuesService.UpdateForQuery(query);
-            Services.Notifier.Information(T("Client side avaliable value were be updated for Query {0} ", query.Name));
-
-            return RedirectToAction("Index");
-        }
 
         public ActionResult Edit(int id)
         {
@@ -283,6 +266,43 @@ namespace MainBit.Projections.ClientSide.Controllers
             #endregion
 
             return View(viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            if (!Services.Authorizer.Authorize(Permissions.ManageQueries, T("Not authorized to manage queries")))
+                return new HttpUnauthorizedResult();
+
+            var query = _queryService.GetQuery(id);
+
+            if (query == null)
+            {
+                return HttpNotFound();
+            }
+
+            Services.ContentManager.Remove(query.ContentItem);
+            Services.Notifier.Information(T("Query {0} deleted", query.Name));
+
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Update(int id)
+        {
+            if (!Services.Authorizer.Authorize(Permissions.ManageQueries, T("Not authorized to manage queries")))
+                return new HttpUnauthorizedResult();
+
+            var query = _queryService.GetQuery(id);
+
+            if (query == null)
+            {
+                return HttpNotFound();
+            }
+
+            _avaliableValuesService.UpdateForQuery(query);
+            Services.Notifier.Information(T("Client side avaliable value were be updated for Query {0} ", query.Name));
+
+            return RedirectToAction("Index");
         }
     }
 }

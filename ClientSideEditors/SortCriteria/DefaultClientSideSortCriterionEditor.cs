@@ -118,5 +118,19 @@ namespace MainBit.Projections.ClientSide.ClientSideEditors.SortCriteria
             }
         }
 
+        public override IDictionary<string, string> BuildDefaultState(Orchard.Projections.Descriptors.SortCriterion.SortCriterionDescriptor descriptor)
+        {
+            var dictionary = new Dictionary<string, string>();
+            var name = QueryFromHelper.GetName(descriptor.Category, descriptor.Type);
+
+            dictionary.Add("Description", QueryFromHelper.GetDisplayName(descriptor.Name.ToString()));
+            dictionary.Add("Sort", string.Format(ClientSideProjectionTokensService.TokenName, "sort-" + name));
+            dictionary.Add("SortUndefined", "None");
+            dictionary.Add("ClientSideSwitcher", "true");
+            dictionary.Add("ClientSideName", name);
+
+            return dictionary;
+        }
+
     }
 }

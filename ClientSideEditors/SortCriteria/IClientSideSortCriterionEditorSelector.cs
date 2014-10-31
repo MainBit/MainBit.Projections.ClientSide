@@ -6,16 +6,16 @@ using System.Web;
 
 namespace MainBit.Projections.ClientSide.ClientSideEditors.SortCriteria
 {
-    public interface IClientSideSortCriterionEditorSelector : IDependency
+    public interface IClientSideSortEditorSelector : IDependency
     {
         IClientSideSortCriterionEditor GetEditor(string sortCriterionFormName);
     }
 
-    public class ClientSideSortCriterionEditorSelector : IClientSideSortCriterionEditorSelector
+    public class ClientSideSortEditorSelector : IClientSideSortEditorSelector
     {
         private readonly IEnumerable<IClientSideSortCriterionEditor> _editors;
 
-        public ClientSideSortCriterionEditorSelector(IEnumerable<IClientSideSortCriterionEditor> editors)
+        public ClientSideSortEditorSelector(IEnumerable<IClientSideSortCriterionEditor> editors)
         {
             _editors = editors;
         }

@@ -125,6 +125,21 @@ namespace MainBit.Projections.ClientSide.ClientSideEditors.Filters
         {
             filter.Items = null;
         }
+
+        public override IDictionary<string, string> BuildDefaultState(Orchard.Projections.Descriptors.Filter.FilterDescriptor descriptor)
+        {
+            var dictionary = new Dictionary<string, string>();
+            var name = QueryFromHelper.GetName(descriptor.Category, descriptor.Type);
+
+            dictionary.Add("Description", QueryFromHelper.GetDisplayName(descriptor.Name.ToString()));
+            dictionary.Add("Operator", "ContainsAny");
+            dictionary.Add("Value", string.Format(ClientSideProjectionTokensService.TokenName, name));
+            dictionary.Add("OperatorUndefined", "Any");
+            dictionary.Add("ClientSideSwitcher", "true");
+            dictionary.Add("ClientSideName", name);
+
+            return dictionary;
+        }
     }
 
 }

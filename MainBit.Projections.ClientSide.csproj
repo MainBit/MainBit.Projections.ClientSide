@@ -120,6 +120,8 @@
     <Compile Include="ClientSideEditors\Filters\BooleanClientSideFilterEditor.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\FastSearchController.cs" />
+    <Compile Include="Controllers\FilterController.cs" />
+    <Compile Include="Controllers\SortCriteriaController.cs" />
     <Compile Include="Descriptors\FilterValueRetrievers\DescribeFilterContext.cs" />
     <Compile Include="Descriptors\FilterValueRetrievers\DescribeFilterFor.cs" />
     <Compile Include="Descriptors\TypeDescriptor.cs" />
@@ -180,8 +182,10 @@
     <Compile Include="Services\IFilterValueRetriverProvider.cs" />
     <Compile Include="Services\IPrepareService.cs" />
     <Compile Include="Services\IPresetService.cs" />
+    <Compile Include="Services\IFilterService.cs" />
     <Compile Include="Services\IUrlService.cs" />
     <Compile Include="Services\IClientSideProjectionTokensService.cs" />
+    <Compile Include="Services\QueryFromHelper.cs" />
     <Compile Include="Storage\IStorage.cs" />
     <Compile Include="Storage\Providers\IStorageProvider.cs" />
     <Compile Include="Storage\Providers\InfosetStorageProvider.cs" />
@@ -192,12 +196,19 @@
     <Compile Include="Tokens\ClientSideQueryTokens.cs" />
     <Compile Include="ViewModels\ClientSideProjectionPartEditViewModel.cs" />
     <Compile Include="ViewModels\AdminIndexViewModel.cs" />
+    <Content Include="Views\Admin\Edit.cshtml" />
     <None Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\ClientSideFilters.Enum.cshtml" />
     <Content Include="Views\Parts\ClientSideProjectionPart.SortCriteria.cshtml" />
     <Content Include="Views\ClientSideSortCriterion.Default.cshtml" />
     <Content Include="Views\Parts\ClientSideProjectionPart.Layouts.cshtml" />
-    <Content Include="Views\Parts\ProjectionPart.DefaultList.cshtml" />
+    <Content Include="Views\Parts\ProjectionPart.Default.cshtml" />
+    <Content Include="Views\Filter\Add.cshtml" />
+    <Content Include="Views\Filter\Edit.cshtml" />
+    <Content Include="Views\Filter\AddDefaultClientSide.cshtml" />
+    <Content Include="Views\SortCriterion\Add.cshtml" />
+    <Content Include="Views\SortCriterion\Edit.cshtml" />
+    <Content Include="Views\SortCriterion\AddDefaultClientSide.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\EditorTemplates\Parts\ClientSideProjectionPart.cshtml" />

@@ -23,13 +23,13 @@ namespace MainBit.Projections.ClientSide.Handlers
     public class ClientSideProjectionPartHandler: ContentHandler {
 
         private readonly IClientSideFilterEditorSelector _clientSideFilterEditorSelector;
-        private readonly IClientSideSortCriterionEditorSelector _clientSideSortCriterionEditorSelector;
+        private readonly IClientSideSortEditorSelector _clientSideSortCriterionEditorSelector;
         private readonly IStorageProvider _storageProvider;
         private readonly IProjectionManager _projectionManager;
 
         public ClientSideProjectionPartHandler(IRepository<ClientSideProjectionPartRecord> repository,
             IClientSideFilterEditorSelector clientSideFilterEditorSelector,
-            IClientSideSortCriterionEditorSelector clientSideSortCriterionEditorSelector,
+            IClientSideSortEditorSelector clientSideSortCriterionEditorSelector,
             IStorageProvider storageProvider,
             IProjectionManager projectionManager)
         {

@@ -15,6 +15,7 @@ namespace MainBit.Projections.ClientSide.Services
 
     public class ClientSideProjectionTokensService : IClientSideProjectionTokensService
     {
+        public const string TokenName = "ClientSideFilters.Value:{0}";
         private const string Name = "ClientSideProjectionTokens";
         private readonly IWorkContextAccessor _wca;
 

@@ -3,6 +3,7 @@ using MainBit.Projections.ClientSide.Models.Filters;
 using MainBit.Projections.ClientSide.Services;
 using Orchard.Forms.Services;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
@@ -71,6 +72,22 @@ namespace MainBit.Projections.ClientSide.ClientSideEditors.Filters
             sb.Append("\"}");
 
             return sb.ToString();
+        }
+
+
+        public override IDictionary<string, string> BuildDefaultState(Orchard.Projections.Descriptors.Filter.FilterDescriptor descriptor)
+        {
+            var dictionary = new Dictionary<string, string>();
+            var name = QueryFromHelper.GetName(descriptor.Category, descriptor.Type);
+
+            dictionary.Add("Description", QueryFromHelper.GetDisplayName(descriptor.Name.ToString()));
+            dictionary.Add("Operator", "Equals");
+            dictionary.Add("Value", string.Format(ClientSideProjectionTokensService.TokenName, name));
+            dictionary.Add("ValueUndefined", "Any");
+            dictionary.Add("ClientSideSwitcher", "true");
+            dictionary.Add("ClientSideName", name);
+
+            return dictionary;
         }
     }
 

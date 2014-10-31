@@ -182,6 +182,22 @@ namespace MainBit.Projections.ClientSide.ClientSideEditors.Filters
             filter.Min = null;
             filter.Scale = null;
         }
+
+        public override IDictionary<string, string> BuildDefaultState(Orchard.Projections.Descriptors.Filter.FilterDescriptor descriptor)
+        {
+            var dictionary = new Dictionary<string, string>();
+            var name = QueryFromHelper.GetName(descriptor.Category, descriptor.Type);
+
+            dictionary.Add("Description", QueryFromHelper.GetDisplayName(descriptor.Name.ToString()));
+            dictionary.Add("OperatorMin", "GreaterThanEquals");
+            dictionary.Add("Min", string.Format(ClientSideProjectionTokensService.TokenName, name + NameFrom));
+            dictionary.Add("OperatorMax", "LessThanEquals");
+            dictionary.Add("Max", string.Format(ClientSideProjectionTokensService.TokenName, name + NameTo));
+            dictionary.Add("ClientSideSwitcher", "true");
+            dictionary.Add("ClientSideName", name);
+
+            return dictionary;
+        }
     }
 
     public static class NumericClientSideFilterExtensions

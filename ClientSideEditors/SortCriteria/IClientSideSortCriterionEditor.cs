@@ -21,6 +21,8 @@ namespace MainBit.Projections.ClientSide.ClientSideEditors.SortCriteria
         void BuildTokens(ClientSideSortCriterion sortCriterion, IClientSideProjectionTokensService tokenService);
 
         dynamic BuildDisplay(ClientSideSortCriterion part, dynamic shapeHelper);
+
+        IDictionary<string, string> BuildDefaultState(Orchard.Projections.Descriptors.SortCriterion.SortCriterionDescriptor descriptor);
     }
 
     public abstract class ClientSideSortCriterionEditor<TClientSideSortCriterion> : IClientSideSortCriterionEditor where TClientSideSortCriterion : ClientSideSortCriterion, new()
@@ -29,7 +31,7 @@ namespace MainBit.Projections.ClientSide.ClientSideEditors.SortCriteria
         public virtual bool CanHandle(string filterEditorFormName) { return false; }
         protected virtual void OnCreated(TClientSideSortCriterion sortCriterion, IDictionary<string, string> state) { }
         public virtual void OnFormBuilt(BuildingContext context, dynamic shapeHelper) { }
-
+        public virtual IDictionary<string, string> BuildDefaultState(Orchard.Projections.Descriptors.SortCriterion.SortCriterionDescriptor descriptor) { return null; }
 
         ClientSideSortCriterion IClientSideSortCriterionEditor.Factory(IDictionary<string, string> state, string sortCriterionName, string sortCriterionDisplayName, string category, string type)
         {

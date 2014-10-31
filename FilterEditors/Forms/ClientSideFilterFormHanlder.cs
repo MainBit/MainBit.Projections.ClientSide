@@ -15,7 +15,7 @@ namespace MainBit.Projections.ClientSide.ClientSideEditors.Filters.Forms
     public class ClientSideFilterFormHanlder : FormHandler
     {
         private readonly IClientSideFilterEditorSelector _clientSideFilterEditorSelector;
-        private readonly IClientSideSortCriterionEditorSelector _clientSideSortCriterionEditorSelector;
+        private readonly IClientSideSortEditorSelector _clientSideSortCriterionEditorSelector;
 
         private readonly Work<IResourceManager> _resourceManager;
         protected dynamic Shape { get; set; }
@@ -23,7 +23,7 @@ namespace MainBit.Projections.ClientSide.ClientSideEditors.Filters.Forms
 
         public ClientSideFilterFormHanlder(
             IClientSideFilterEditorSelector clientSideFilterEditorSelector,
-            IClientSideSortCriterionEditorSelector clientSideSortCriterionEditorSelector,
+            IClientSideSortEditorSelector clientSideSortCriterionEditorSelector,
             IShapeFactory shapeFactory,
             Work<IResourceManager> resourceManager)
         {

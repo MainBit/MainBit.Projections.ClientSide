@@ -20,6 +20,9 @@ using Orchard.Projections;
 using System.Web.Routing;
 using Orchard.UI.Notify;
 using Orchard.Mvc;
+using Orchard.Projections.Descriptors.SortCriterion;
+using Orchard.Projections.Descriptors.Layout;
+using Orchard.Projections.Descriptors.Filter;
 
 namespace MainBit.Projections.ClientSide.Controllers
 {
@@ -29,18 +32,21 @@ namespace MainBit.Projections.ClientSide.Controllers
         private readonly IAvaliableValuesService _avaliableValuesService;
         private readonly ISiteService _siteService;
         private readonly IQueryService _queryService;
+        private readonly IProjectionManager _projectionManager;
 
         public AdminController(
             IAvaliableValuesService avaliableValuesService,
             IOrchardServices services,
             IShapeFactory shapeFactory,
             ISiteService siteService,
-            IQueryService queryService)
+            IQueryService queryService,
+            IProjectionManager projectionManager)
         {
             _avaliableValuesService = avaliableValuesService;
             _siteService = siteService;
             _queryService = queryService;
             Services = services;
+            _projectionManager = projectionManager;
 
             T = NullLocalizer.Instance;
             Shape = shapeFactory;
@@ -165,6 +171,109 @@ namespace MainBit.Projections.ClientSide.Controllers
             Services.Notifier.Information(T("Client side avaliable value were be updated for Query {0} ", query.Name));
 
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Edit(int id)
+        {
+            if (!Services.Authorizer.Authorize(Permissions.ManageQueries, T("Not authorized to edit queries")))
+                return new HttpUnauthorizedResult();
+
+            var query = _queryService.GetQuery(id);
+            var viewModel = new Orchard.Projections.ViewModels.AdminEditViewModel
+            {
+                Id = query.Id,
+                Name = query.Name
+            };
+
+            #region Load Filters
+            var filterGroupEntries = new List<Orchard.Projections.ViewModels.FilterGroupEntry>();
+            var allFilters = _projectionManager.DescribeFilters().SelectMany(x => x.Descriptors).ToList();
+
+            foreach (var group in query.FilterGroups)
+            {
+                var filterEntries = new List<Orchard.Projections.ViewModels.FilterEntry>();
+
+                foreach (var filter in group.Filters.OrderBy(s => s.Position))
+                {
+                    var category = filter.Category;
+                    var type = filter.Type;
+
+                    var f = allFilters.FirstOrDefault(x => category == x.Category && type == x.Type);
+                    if (f != null)
+                    {
+                        filterEntries.Add(
+                            new Orchard.Projections.ViewModels.FilterEntry
+                            {
+                                Category = f.Category,
+                                Type = f.Type,
+                                FilterRecordId = filter.Id,
+                                DisplayText = String.IsNullOrWhiteSpace(filter.Description) ? f.Display(new FilterContext { State = FormParametersHelper.ToDynamic(filter.State) }).Text : filter.Description
+                            });
+                    }
+                }
+
+                filterGroupEntries.Add(new Orchard.Projections.ViewModels.FilterGroupEntry { Id = group.Id, Filters = filterEntries });
+            }
+
+            viewModel.FilterGroups = filterGroupEntries;
+
+            #endregion
+
+            #region Load Sort criterias
+            var sortCriterionEntries = new List<Orchard.Projections.ViewModels.SortCriterionEntry>();
+            var allSortCriteria = _projectionManager.DescribeSortCriteria().SelectMany(x => x.Descriptors).ToList();
+
+            foreach (var sortCriterion in query.SortCriteria.OrderBy(s => s.Position))
+            {
+                var category = sortCriterion.Category;
+                var type = sortCriterion.Type;
+
+                var f = allSortCriteria.FirstOrDefault(x => category == x.Category && type == x.Type);
+                if (f != null)
+                {
+                    sortCriterionEntries.Add(
+                        new Orchard.Projections.ViewModels.SortCriterionEntry
+                        {
+                            Category = f.Category,
+                            Type = f.Type,
+                            SortCriterionRecordId = sortCriterion.Id,
+                            DisplayText = String.IsNullOrWhiteSpace(sortCriterion.Description) ? f.Display(new SortCriterionContext { State = FormParametersHelper.ToDynamic(sortCriterion.State) }).Text : sortCriterion.Description
+                        });
+                }
+            }
+
+            viewModel.SortCriteria = sortCriterionEntries;
+
+            #endregion
+
+            #region Load Layouts
+            var layoutEntries = new List<Orchard.Projections.ViewModels.LayoutEntry>();
+            var allLayouts = _projectionManager.DescribeLayouts().SelectMany(x => x.Descriptors).ToList();
+
+            foreach (var layout in query.Layouts)
+            {
+                var category = layout.Category;
+                var type = layout.Type;
+
+                var f = allLayouts.FirstOrDefault(x => category == x.Category && type == x.Type);
+                if (f != null)
+                {
+                    layoutEntries.Add(
+                        new Orchard.Projections.ViewModels.LayoutEntry
+                        {
+                            Category = f.Category,
+                            Type = f.Type,
+                            LayoutRecordId = layout.Id,
+                            DisplayText = String.IsNullOrWhiteSpace(layout.Description) ? f.Display(new LayoutContext { State = FormParametersHelper.ToDynamic(layout.State) }).Text : layout.Description
+                        });
+                }
+            }
+
+            viewModel.Layouts = layoutEntries;
+
+            #endregion
+
+            return View(viewModel);
         }
     }
 }

@@ -30,6 +30,8 @@ namespace MainBit.Projections.ClientSide.ClientSideEditors.Filters
         void BuildTokens(ClientSideFilter filter, IClientSideProjectionTokensService tokenService);
         dynamic BuildDisplay(ClientSideFilter part, dynamic shapeHelper);
         string ToJsonString(ClientSideFilter filter);
+
+        IDictionary<string, string> BuildDefaultState(Orchard.Projections.Descriptors.Filter.FilterDescriptor descriptor);
     }
 
     public abstract class ClientSideFilterEditor<TClientSideFilter> : IClientSideFilterEditor where TClientSideFilter : ClientSideFilter, new()
@@ -38,6 +40,7 @@ namespace MainBit.Projections.ClientSide.ClientSideEditors.Filters
         public virtual bool CanHandle(string filterEditorFormName, string clientSideType = null) { return false; }
         public virtual void OnCreated(TClientSideFilter filter, dynamic state) { }
         public virtual void OnFormBuilt(BuildingContext context, dynamic shapeHelper) { }
+        public virtual IDictionary<string, string> BuildDefaultState(Orchard.Projections.Descriptors.Filter.FilterDescriptor descriptor) { return null; }
 
 
         ClientSideFilter IClientSideFilterEditor.Factory(IStorage clientSideFilterStorage, dynamic state, string filterName, string filterDisplayName, string category, string type)

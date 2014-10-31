@@ -20,5 +20,6 @@ namespace MainBit.Projections.ClientSide.Models.Filters
 
 
         public IClientSideFilterEditor Editor { get; set; }
+        public Orchard.Projections.Descriptors.Filter.FilterDescriptor Descriptor { get; set; }
     }
 }

@@ -13,7 +13,7 @@ namespace MainBit.Projections.ClientSide
 
             builder.AddImageSet("projector").Add(T("Queries"), "3",
                menu => menu
-                   .Add(T("Only update client side queries"), "3.0",
+                   .Add(T("Client side queries"), "3.0",
                        qi => qi.Action("Index", "Admin", new { area = "MainBit.Projections.ClientSide" }).Permission(Permissions.ManageQueries).LocalNav())
             );
         }

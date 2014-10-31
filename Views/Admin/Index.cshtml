@@ -14,8 +14,9 @@
     }
 }
 
-<h1>@Html.TitleForPage(T("Only update client side queries").ToString())</h1>
-@using (Html.BeginFormAntiForgeryPost()) {
+<h1>@Html.TitleForPage(T("Client side queries").ToString())</h1>
+@using (Html.BeginFormAntiForgeryPost())
+{
     @Html.ValidationSummary()
     
     <fieldset class="bulk-actions">
@@ -35,9 +36,10 @@
 		<label for="pageSize">@T("Show:")</label>
 		<select id="pageSize" name="PageSize">
 			@Html.SelectOption((int)Model.Pager.PageSize, 0, T("All").ToString())
-			@foreach(int size in pageSizes.OrderBy(p => p)) {
+			@foreach (int size in pageSizes.OrderBy(p => p))
+            {
 				@Html.SelectOption((int)Model.Pager.PageSize, size, size.ToString())
-			}
+            }
 		</select>
         <button type="submit" name="submit.Filter" value="@T("Filter")">@T("Filter")</button>
     </fieldset>
@@ -51,21 +53,21 @@
                     <th scope="col" class="actions">&nbsp;</th>
                 </tr>
             </thead>
-            @foreach (var entry in Model.Queries) { 
+            @foreach (var entry in Model.Queries)
+            { 
                 <tr>
                     <td>
                         <input type="hidden" value="@Model.Queries[index].QueryId" name="@Html.NameOf(m => m.Queries[index].QueryId)"/>
                         <input type="checkbox" value="true" name="@Html.NameOf(m => m.Queries[index].IsChecked)"/>
                     </td>
                     <td>
-                        @entry.Name
-                        @*@Html.ActionLink(entry.Name, "Edit", new { id = entry.QueryId })*@ 
+                        @Html.ActionLink(entry.Name, "Edit", new { id = entry.QueryId })
                     </td>
                     <td>
-                        @Html.ActionLink(T("Update").ToString(), "Update", new { id = entry.QueryId })
-                        @*@Html.ActionLink(T("Properties").ToString(), "Edit", new { Area = "Contents", id = entry.QueryId, returnurl = HttpContext.Current.Request.RawUrl }) |
+                        @Html.ActionLink(T("Update").ToString(), "Update", new { id = entry.QueryId })  |
+                        @Html.ActionLink(T("Properties").ToString(), "Edit", new { Area = "Contents", id = entry.QueryId, returnurl = HttpContext.Current.Request.RawUrl }) |
                         @Html.ActionLink(T("Edit").ToString(), "Edit", new { id = entry.QueryId }) |
-                        @Html.ActionLink(T("Delete").ToString(), "Delete", new { id = entry.QueryId }, new { itemprop = "RemoveUrl UnsafeUrl" })
+                        @*@Html.ActionLink(T("Delete").ToString(), "Delete", new { id = entry.QueryId }, new { itemprop = "RemoveUrl UnsafeUrl" })
                         @if (entry.Query.FilterGroups.SelectMany(x => x.Filters).Any()) {
                             <text>| </text> @Html.ActionLink(T("Preview").ToString(), "Preview", new { id = entry.QueryId })
                         }*@

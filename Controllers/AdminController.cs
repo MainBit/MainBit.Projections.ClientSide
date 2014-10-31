@@ -93,11 +93,20 @@ namespace MainBit.Projections.ClientSide.Controllers
 
             var results = queries
                 .List()
-                .Where(q => q.FilterGroups.SelectMany(g => g.Filters).Any(filter =>
-                { 
-                    var state = FormParametersHelper.FromString(filter.State);
-                    return ClientSideFilterFormHelper.IsForClientSide(state);
-                }))
+                //.Where(q =>
+                //    q.FilterGroups.SelectMany(g => g.Filters).Any(filter => {
+                //        var state = FormParametersHelper.FromString(filter.State);
+                //        return ClientSideFilterFormHelper.IsForClientSide(state);
+                //        })
+                //    || q.SortCriteria.Any(sort => {
+                //        var state = FormParametersHelper.FromString(sort.State);
+                //        return ClientSideFilterFormHelper.IsForClientSide(state);
+                //        })
+                //    || q.Layouts.Any(layouts => {
+                //        var state = FormParametersHelper.FromString(layouts.State);
+                //        return ClientSideFilterFormHelper.IsForClientSide(state);
+                //        })
+                //    )
                 .Skip(pager.GetStartIndex())
                 .Take(pager.PageSize);
 

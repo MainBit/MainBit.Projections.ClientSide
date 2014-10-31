@@ -190,9 +190,9 @@ namespace MainBit.Projections.ClientSide.ClientSideEditors.Filters
 
             dictionary.Add("Description", QueryFromHelper.GetDisplayName(descriptor.Name.ToString()));
             dictionary.Add("OperatorMin", "GreaterThanEquals");
-            dictionary.Add("Min", string.Format(ClientSideProjectionTokensService.TokenName, name + NameFrom));
+            dictionary.Add("Min", "{" + string.Format(ClientSideProjectionTokensService.TokenName, name + NameFrom) + "}");
             dictionary.Add("OperatorMax", "LessThanEquals");
-            dictionary.Add("Max", string.Format(ClientSideProjectionTokensService.TokenName, name + NameTo));
+            dictionary.Add("Max", "{" + string.Format(ClientSideProjectionTokensService.TokenName, name + NameTo) + "}");
             dictionary.Add("ClientSideSwitcher", "true");
             dictionary.Add("ClientSideName", name);
 

@@ -133,7 +133,7 @@ namespace MainBit.Projections.ClientSide.ClientSideEditors.Filters
 
             dictionary.Add("Description", QueryFromHelper.GetDisplayName(descriptor.Name.ToString()));
             dictionary.Add("Operator", "ContainsAny");
-            dictionary.Add("Value", string.Format(ClientSideProjectionTokensService.TokenName, name));
+            dictionary.Add("Value", "{" + string.Format(ClientSideProjectionTokensService.TokenName, name) + "}");
             dictionary.Add("OperatorUndefined", "Any");
             dictionary.Add("ClientSideSwitcher", "true");
             dictionary.Add("ClientSideName", name);

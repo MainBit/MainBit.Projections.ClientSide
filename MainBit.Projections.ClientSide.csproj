@@ -118,9 +118,16 @@
     <Compile Include="ClientSideEditors\Filters\EnumClientSideFilterEditor.cs" />
     <Compile Include="ClientSideEditors\Filters\NumericClientSideFilterEditor.cs" />
     <Compile Include="ClientSideEditors\Filters\BooleanClientSideFilterEditor.cs" />
+    <Compile Include="ClientSideEditors\Layouts\GridClientSideLayoutEditor.cs" />
+    <Compile Include="ClientSideEditors\Layouts\IClientSideLayoutEditorSelector.cs" />
+    <Compile Include="ClientSideEditors\Layouts\IClientSideLayoutEditor.cs" />
+    <Compile Include="ClientSideEditors\Layouts\RawClientSideLayoutEditor.cs" />
+    <Compile Include="ClientSideEditors\Layouts\ShapeClientSideLayoutEditor.cs" />
+    <Compile Include="ClientSideEditors\Layouts\ListClientSideLayoutEditor.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\FastSearchController.cs" />
     <Compile Include="Controllers\FilterController.cs" />
+    <Compile Include="Controllers\LayoutController.cs" />
     <Compile Include="Controllers\SortCriteriaController.cs" />
     <Compile Include="Descriptors\FilterValueRetrievers\DescribeFilterContext.cs" />
     <Compile Include="Descriptors\FilterValueRetrievers\DescribeFilterFor.cs" />
@@ -209,6 +216,10 @@
     <Content Include="Views\SortCriterion\Add.cshtml" />
     <Content Include="Views\SortCriterion\Edit.cshtml" />
     <Content Include="Views\SortCriterion\AddDefaultClientSide.cshtml" />
+    <Content Include="Views\Layout\Add.cshtml" />
+    <Content Include="Views\Layout\Create.cshtml" />
+    <Content Include="Views\Layout\Edit.cshtml" />
+    <Content Include="Views\Layout\AddDefaultClientSide.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\EditorTemplates\Parts\ClientSideProjectionPart.cshtml" />

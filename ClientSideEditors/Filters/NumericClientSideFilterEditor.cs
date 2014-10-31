@@ -186,9 +186,9 @@ namespace MainBit.Projections.ClientSide.ClientSideEditors.Filters
         public override IDictionary<string, string> BuildDefaultState(Orchard.Projections.Descriptors.Filter.FilterDescriptor descriptor)
         {
             var dictionary = new Dictionary<string, string>();
-            var name = QueryFromHelper.GetName(descriptor.Category, descriptor.Type);
+            var name = QueryFormHelper.GetName(descriptor.Category, descriptor.Type);
 
-            dictionary.Add("Description", QueryFromHelper.GetDisplayName(descriptor.Name.ToString()));
+            dictionary.Add("Description", QueryFormHelper.GetDisplayName(descriptor.Name.ToString()));
             dictionary.Add("OperatorMin", "GreaterThanEquals");
             dictionary.Add("Min", "{" + string.Format(ClientSideProjectionTokensService.TokenName, name + NameFrom) + "}");
             dictionary.Add("OperatorMax", "LessThanEquals");

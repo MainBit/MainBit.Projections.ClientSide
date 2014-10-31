@@ -235,7 +235,7 @@ namespace MainBit.Projections.ClientSide.Drivers
                     model.QueryRecordId = part.Record.QueryPartRecord.Id;
                 }
 
-                model.QueryRecordEntries = Services.ContentManager.Query<QueryPart>().Join<TitlePartRecord>().OrderBy(x => x.Title).List()
+                model.QueryRecordEntries = Services.ContentManager.Query<QueryPart, QueryPartRecord>().Join<TitlePartRecord>().OrderBy(x => x.Title).List()
                     .Select(query => new QueryRecordEntry
                     {
                         Id = query.Id,

@@ -97,7 +97,10 @@
         <thead>
             <tr>
                 <th scope="col" >@T("Description")</th>
-                <th scope="col" class="actions">@Html.ActionLink(T("+ Add a new Layout").Text, "Add", new { controller = "Layout", id = Model.Id })</th>
+                <th scope="col" class="actions">
+                    @Html.ActionLink(T("+ Add a new Layout").Text, "Add", new { controller = "Layout", id = Model.Id }) |
+                    @Html.ActionLink(T("+ Add a new default client side Layout").Text, "AddDefaultClientSide", new { controller = "Layout", id = Model.Id })
+                </th>
             </tr>
         </thead>
     @foreach (var layout in Model.Layouts) {

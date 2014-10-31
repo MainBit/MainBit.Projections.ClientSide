@@ -5,7 +5,7 @@ using System.Web;
 
 namespace MainBit.Projections.ClientSide.Services
 {
-    public static class QueryFromHelper
+    public static class QueryFormHelper
     {
         public static string GetDisplayName(string descriptorName)
         {

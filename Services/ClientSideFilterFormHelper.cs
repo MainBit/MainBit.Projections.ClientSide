@@ -7,6 +7,7 @@ using System.Dynamic;
 using System.ComponentModel;
 using System.Text;
 using System.Web.Script.Serialization;
+using System.Web.Mvc;
 
 namespace MainBit.Projections.ClientSide.Services
 {
@@ -40,6 +41,29 @@ namespace MainBit.Projections.ClientSide.Services
             relatedElShape.Attributes.Add("data-elements", jsonElements);
 
             return relatedElShape;
+        }
+
+        public static void PopulateFromShape(dynamic shape, IDictionary<string, string> dictionary)
+        {
+            var name = shape.Name;
+            if (name != null)
+            {
+                if (shape.Metadata.Type == "Checkbox" || shape.Metadata.Type == "Radio")
+                {
+                    if (shape.Checked != null && shape.Checked)
+                    {
+                        dictionary[name] = shape.Value != null ? shape.Value.ToString() : string.Empty;
+                    }
+                    else
+                    {
+
+                    }
+                }
+                else
+                {
+                    dictionary[name] = shape.Value != null ? shape.Value.ToString() : string.Empty;
+                }
+            }
         }
     }
 }

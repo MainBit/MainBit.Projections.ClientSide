@@ -1,38 +1,183 @@
-﻿.slider-container {
+﻿/* sort */
+.b-client-side-sort {
+    border-top: 1px solid #dbdbdb;
+    padding: 10px 0 0;
+    margin: 10px 0 0;
+}
+.b-client-side-sort ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: inline-block;
+}
+.b-client-side-sort ul li {
+    display: inline-block;
+    margin-left: 0.3em;
+}
+.b-client-side-sort a.current:before {
+    content: " ";
+    display: inline-block;
+    height: 0;
+    width: 0;
+    border: 4px solid transparent;
+    margin: 0 3px 0 0;
+    position:relative;
+}
+.b-client-side-sort a.ascending:before {
+    border-top-width: 6px;
+    border-top-color: #434343;
+    top: 3px;
+}
+.b-client-side-sort a.descending:before {
+    border-bottom-width: 6px;
+    border-bottom-color: #434343;
+    top: -2px;
+}
+
+/* layouts */
+.b-client-side-layouts {
+    border-bottom: 1px solid #dbdbdb;
+    padding: 0 0 10px;
+    margin: 0 0 10px;
+}
+.b-client-side-layouts a {
+    margin-left: 0.3em;
+}
+
+/* filters - list */
+.client-side-filters {
     position: relative;
+}
+.client-side-filters__list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* filters - fast search */
+.fast-search-result {
+    display: none;
+    position: absolute;
+    right: 100%;
+    margin-right: 17px;
+    white-space: nowrap;
+    min-width: 12em;
+    border: 1px solid #999;
+    padding: 0.4em 1em;
+    margin-top: -0.2em;
+    background: #fff;
+}
+.fast-search-result:before, .fast-search-result:after {
+    left: 100%;
+	top: 50%;
+    margin-top: -3px;
+	border: solid transparent;
+	content: " ";
+	position: absolute;
+	pointer-events: none;
+}
+.fast-search-result:before {
+    border-left-color: #999;
+    border-width: 7px;
+    margin-top: -7px;
+}
+.fast-search-result:after {
+    border-left-color: #fff;
+    border-width: 5px;
+    margin-top: -5px;
+}
+.fast-search-result.process {
+    display: none;
+}
+.fast-search-result.complete {
+    display: block;
+}
+
+/* filters - common */
+.client-side-filter .title {
+    font-size: 1.077em;
+    display: inline-block;
+    padding-bottom: 0;
+    margin-bottom: 0.3em;
+    cursor: pointer;
+}
+.client-side-filter .title span {
+    border-bottom: 1px dashed;
+}
+.client-side-filter .title:before {
+    content: " ";
+    display: inline-block;
+    height: 0;
+    width: 0;
+    border: 4px solid transparent;
+}
+.client-side-filter.collapse .title:before {
+    border-left-width: 6px;
+    border-left-color: #434343;
+    margin: 0 0 0 1px;
+   
+}
+.client-side-filter.expand .title:before {
+    border-top-width: 6px;
+    border-top-color: #434343;
+    margin: 0 3px 0 0;
+    position:relative;
+    top: 3px;
+}
+.client-side-filter label {
+    display: inline;
+}
+.b-more-less__link {
+    margin: 3px 0 0 28px;
+}
+.b-more-less__link span {
+    cursor: pointer;
+    border-bottom: 1px dashed;
+}
+.client-side-filter input[type=checkbox] {
+    margin-bottom: 0;
+}
+
+
+/* filters - numeric */
+.slider-container {
+    position: relative;
+
+    margin-bottom: 0.3em;
 }
 .empty-line { /* to show a filter line outside current filtered value zone ( ) */
     position:absolute;
     width:100%;
 
-    height: 10px;
-    top: 10px;
-    background: yellow;
+    height: 8px;
+    top: 6px;
+    background: #ebebeb;
    
 }
 .slider, .ui-slider { /* to show a zone whitch will be able for clicking by user to apply filters */
     position: relative;
 
-    margin-right: 15px; /* width of ui-slider-handle */
-    height: 30px;
+    margin-right: 10px; /* width of ui-slider-handle */
+    height: 20px;
 }
 .ui-slider-range {  /* to show a filter line inside current filtered value zone ( ) */
     position: absolute;
     z-index: 1;
 
-    background: #9ec44e;
-    height: 10px;
-    top: 10px;
+    margin-left: 5px; /* a half of width of ui-slider-handle */
+    background: #999;
+    height: 8px;
+    top: 6px;
 }
 .ui-slider .ui-slider-handle { /*there are ".ui-slider .ui-slider-handle .ui-state-default" (.ui-state-hover, .ui-state-active, .ui-state-focus*) */
     position: absolute;
     z-index: 2;
 
-    width: 15px;
-    height: 30px;
-    background: orange;
+    width: 8px;
+    height: 18px;
+    background: #ebebeb;
+    border: #999 solid 1px;
 }
-
 /*.ui-slider.ui-slider-horizontal { }
 .ui-slider.ui-slider-vertical { }
 

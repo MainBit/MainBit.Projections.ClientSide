@@ -3,8 +3,10 @@
 @{
     NumericClientSideFilter filter = Model.Filter;
     decimal? step = filter.Scale != null ? (decimal?)Math.Pow(10, 0 - (double)filter.Scale.Value) : null;
+
+    var expandedClass = "expand"; // collapse
 }
-<fieldset class="client-side-filter numeric">
+<fieldset class="client-side-filter numeric @expandedClass">
     <label class="title"><span>@filter.DisplayName</span></label>
     <div class="content">
         <div class="slider-container">

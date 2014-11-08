@@ -71,12 +71,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Scripts\mainbit-projection-clientside-editor-sort-default.js" />
-    <Content Include="Scripts\mainbit-projection-clientside-editor-enum.js" />
-    <Content Include="Scripts\mainbit-projection-clientside-editor.js" />
-    <Content Include="Scripts\mainbit-projection-clientside-editor-numeric.js" />
-    <Content Include="Scripts\mainbit-projection-clientside.js" />
-    <Content Include="Scripts\mainbit-projection-editor-numeric.js" />
+    <Content Include="Styles\mainbit-projection-clientside.css" />
     <Content Include="Web.config" />
     <Content Include="Scripts\Web.config" />
     <Content Include="Styles\Web.config" />
@@ -110,20 +105,24 @@
       <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Content Include="Views\ClientSideFilters.Numeric.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
+    <Compile Include="ActionFilters\ClientSideProjectionFilter.cs" />
     <Compile Include="AdminMenu.cs" />
-    <Compile Include="ClientSideEditors\Filters\EnumClientSideFilterEditor.cs" />
-    <Compile Include="ClientSideEditors\Filters\NumericClientSideFilterEditor.cs" />
     <Compile Include="ClientSideEditors\Filters\BooleanClientSideFilterEditor.cs" />
+    <Compile Include="ClientSideEditors\Filters\EnumClientSideFilterEditor.cs" />
+    <Compile Include="ClientSideEditors\Filters\IClientSideFilterEditor.cs" />
+    <Compile Include="ClientSideEditors\Filters\IClientSideFilterEditorSelector.cs" />
+    <Compile Include="ClientSideEditors\Filters\NumericClientSideFilterEditor.cs" />
     <Compile Include="ClientSideEditors\Layouts\GridClientSideLayoutEditor.cs" />
-    <Compile Include="ClientSideEditors\Layouts\IClientSideLayoutEditorSelector.cs" />
     <Compile Include="ClientSideEditors\Layouts\IClientSideLayoutEditor.cs" />
+    <Compile Include="ClientSideEditors\Layouts\IClientSideLayoutEditorSelector.cs" />
+    <Compile Include="ClientSideEditors\Layouts\ListClientSideLayoutEditor.cs" />
     <Compile Include="ClientSideEditors\Layouts\RawClientSideLayoutEditor.cs" />
     <Compile Include="ClientSideEditors\Layouts\ShapeClientSideLayoutEditor.cs" />
-    <Compile Include="ClientSideEditors\Layouts\ListClientSideLayoutEditor.cs" />
+    <Compile Include="ClientSideEditors\SortCriteria\DefaultClientSideSortCriterionEditor.cs" />
+    <Compile Include="ClientSideEditors\SortCriteria\IClientSideSortCriterionEditor.cs" />
+    <Compile Include="ClientSideEditors\SortCriteria\IClientSideSortCriterionEditorSelector.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\FastSearchController.cs" />
     <Compile Include="Controllers\FilterController.cs" />
@@ -131,109 +130,100 @@
     <Compile Include="Controllers\SortCriteriaController.cs" />
     <Compile Include="Descriptors\FilterValueRetrievers\DescribeFilterContext.cs" />
     <Compile Include="Descriptors\FilterValueRetrievers\DescribeFilterFor.cs" />
+    <Compile Include="Descriptors\FilterValueRetrievers\FilterDescriptor.cs" />
     <Compile Include="Descriptors\TypeDescriptor.cs" />
+    <Compile Include="Drivers\ClientSideProjectionPartDriver.cs" />
+    <Compile Include="FieldsTypesEditors\BooleanVariableFieldTypeEditor.cs" />
     <Compile Include="FieldsTypesEditors\DecimalVariableFieldTypeEditor.cs" />
     <Compile Include="FieldsTypesEditors\FloatVariableFieldTypeEditor.cs" />
     <Compile Include="FieldsTypesEditors\IntegerVariableFieldTypeEditor.cs" />
-    <Compile Include="FieldsTypesEditors\StringVariableFieldTypeEditor.cs" />
-    <Compile Include="FilterEditors\Forms\NumericVariableFilterFormValidation.cs" />
-    <Compile Include="FilterEditors\Forms\StringVariableFilterForm.cs" />
-    <Compile Include="FilterEditors\IVariableFilterEditor.cs" />
-    <Compile Include="FilterEditors\StringVariableEditor.cs" />
-    <Compile Include="FilterEditors\VariableFilterFormater.cs" />
-    <Compile Include="FilterEditors\NumericVariableFilterEditor.cs" />
-    <Compile Include="FilterEditors\Forms\NumericVariableFilterForm.cs" />
-    <Compile Include="FilterEditors\Forms\ClientSideFilterFormHanlder.cs" />
-    <Compile Include="ClientSideEditors\Filters\IClientSideFilterEditorSelector.cs" />
-    <Compile Include="ClientSideEditors\Filters\IClientSideFilterEditor.cs" />
-    <Compile Include="ClientSideEditors\SortCriteria\DefaultClientSideSortCriterionEditor.cs" />
-    <Compile Include="ClientSideEditors\SortCriteria\IClientSideSortCriterionEditor.cs" />
-    <Compile Include="ClientSideEditors\SortCriteria\IClientSideSortCriterionEditorSelector.cs" />
-    <Compile Include="FilterEditors\Forms\BooleanVariableFilterFormValidation.cs" />
-    <Compile Include="Handlers\PrepareHanlder.cs" />
-    <Compile Include="Models\Filters\EnumClientSideFilter.cs" />
-    <Compile Include="Models\Filters\NumericClientSideFilter.cs" />
-    <Compile Include="Models\Filters\BooleanClientSideFilter.cs" />
-    <Compile Include="Models\Filters\ClientSideFilter.cs" />
-    <Compile Include="Descriptors\FilterValueRetrievers\FilterDescriptor.cs" />
-    <Compile Include="Drivers\ClientSideProjectionPartDriver.cs" />
-    <Compile Include="FieldsTypesEditors\BooleanVariableFieldTypeEditor.cs" />
     <Compile Include="FieldsTypesEditors\IVariableFieldTypeEditor.cs" />
+    <Compile Include="FieldsTypesEditors\StringVariableFieldTypeEditor.cs" />
     <Compile Include="FilterEditors\BooleanVariableFilterEditor.cs" />
     <Compile Include="FilterEditors\Forms\BooleanVariableFilterForm.cs" />
+    <Compile Include="FilterEditors\Forms\BooleanVariableFilterFormValidation.cs" />
+    <Compile Include="FilterEditors\Forms\ClientSideFilterFormHanlder.cs" />
+    <Compile Include="FilterEditors\Forms\NumericVariableFilterForm.cs" />
+    <Compile Include="FilterEditors\Forms\NumericVariableFilterFormValidation.cs" />
+    <Compile Include="FilterEditors\Forms\StringVariableFilterForm.cs" />
     <Compile Include="FilterEditors\IVariableFilterCoordinator.cs" />
-    <Compile Include="ActionFilters\ClientSideProjectionFilter.cs" />
+    <Compile Include="FilterEditors\IVariableFilterEditor.cs" />
+    <Compile Include="FilterEditors\NumericVariableFilterEditor.cs" />
+    <Compile Include="FilterEditors\StringVariableEditor.cs" />
+    <Compile Include="FilterEditors\VariableFilterFormater.cs" />
     <Compile Include="Handlers\ClientSideProjectionPartHandler.cs" />
+    <Compile Include="Handlers\PrepareHalder.cs" />
+    <Compile Include="Handlers\PrepareHanlder.cs" />
     <Compile Include="Migrations.cs" />
     <Compile Include="Models\ClientSideProjectionPart.cs" />
     <Compile Include="Models\ClientSideProjectionPartRecord.cs" />
+    <Compile Include="Models\Filters\BooleanClientSideFilter.cs" />
+    <Compile Include="Models\Filters\ClientSideFilter.cs" />
+    <Compile Include="Models\Filters\EnumClientSideFilter.cs" />
+    <Compile Include="Models\Filters\NumericClientSideFilter.cs" />
     <Compile Include="Models\Layouts\ClientSideLayout.cs" />
     <Compile Include="Models\SortCriteria\ClientSideSortCriterion.cs" />
     <Compile Include="Providers\Filters\ContentFieldsFilter.cs" />
     <Compile Include="Providers\Filters\MemberBindingFilter.cs" />
-    <Compile Include="Providers\FilterValueRetrievers\MemberBindingFilter.cs" />
     <Compile Include="Providers\FilterValueRetrievers\ContentFieldsFilter.cs" />
+    <Compile Include="Providers\FilterValueRetrievers\MemberBindingFilter.cs" />
     <Compile Include="Providers\Layouts\ClientSideLayoutFormHanlder.cs" />
     <Compile Include="Providers\SortCriteria\ContentFieldsSortCriteria.cs" />
-    <Compile Include="Providers\SortCriteria\MemberBindingSortCriteria.cs" />
     <Compile Include="Providers\SortCriteria\DisplayVariableSortCriterionHelper.cs" />
+    <Compile Include="Providers\SortCriteria\MemberBindingSortCriteria.cs" />
     <Compile Include="Providers\SortCriteria\VariableSortCriterionFormProvider.cs" />
     <Compile Include="ResourceManifest.cs" />
     <Compile Include="Routes.cs" />
-    <Compile Include="Services\IClientSideLayoutService.cs" />
-    <Compile Include="Services\IAvaliableValuesService.cs" />
     <Compile Include="Services\ClientSideFilterFormHelper.cs" />
+    <Compile Include="Services\IAvaliableValuesService.cs" />
     <Compile Include="Services\IClientSideFilterService.cs" />
+    <Compile Include="Services\IClientSideLayoutService.cs" />
+    <Compile Include="Services\IClientSideProjectionTokensService.cs" />
     <Compile Include="Services\IClientSideSortService.cs" />
     <Compile Include="Services\ICurrentContentAccessor.cs" />
+    <Compile Include="Services\IFilterService.cs" />
     <Compile Include="Services\IFilterValueRetriverProvider.cs" />
     <Compile Include="Services\IPrepareService.cs" />
     <Compile Include="Services\IPresetService.cs" />
-    <Compile Include="Services\IFilterService.cs" />
     <Compile Include="Services\IUrlService.cs" />
-    <Compile Include="Services\IClientSideProjectionTokensService.cs" />
     <Compile Include="Services\QueryFromHelper.cs" />
     <Compile Include="Storage\IStorage.cs" />
-    <Compile Include="Storage\Providers\IStorageProvider.cs" />
     <Compile Include="Storage\Providers\InfosetStorageProvider.cs" />
+    <Compile Include="Storage\Providers\IStorageProvider.cs" />
     <Compile Include="Storage\SimpleStorage.cs" />
-    <Compile Include="ViewModels\ClientSideLayoutViewModel.cs" />
-    <Compile Include="ViewModels\ClientSideSortCriterionViewModel.cs" />
-    <Content Include="Styles\mainbit-projection-clientside.css" />
     <Compile Include="Tokens\ClientSideQueryTokens.cs" />
-    <Compile Include="ViewModels\ClientSideProjectionPartEditViewModel.cs" />
     <Compile Include="ViewModels\AdminIndexViewModel.cs" />
-    <Content Include="Views\Admin\Edit.cshtml" />
-    <None Include="Views\Admin\Index.cshtml" />
-    <Content Include="Views\ClientSideFilters.Enum.cshtml" />
-    <Content Include="Views\Parts\ClientSideProjectionPart.SortCriteria.cshtml" />
-    <Content Include="Views\ClientSideSortCriterion.Default.cshtml" />
-    <Content Include="Views\Parts\ClientSideProjectionPart.Layouts.cshtml" />
-    <Content Include="Views\Parts\ProjectionPart.Default.cshtml" />
-    <Content Include="Views\Filter\Add.cshtml" />
-    <Content Include="Views\Filter\Edit.cshtml" />
-    <Content Include="Views\Filter\AddDefaultClientSide.cshtml" />
-    <Content Include="Views\SortCriterion\Add.cshtml" />
-    <Content Include="Views\SortCriterion\Edit.cshtml" />
-    <Content Include="Views\SortCriterion\AddDefaultClientSide.cshtml" />
-    <Content Include="Views\Layout\Add.cshtml" />
-    <Content Include="Views\Layout\Create.cshtml" />
-    <Content Include="Views\Layout\Edit.cshtml" />
-    <Content Include="Views\Layout\AddDefaultClientSide.cshtml" />
+    <Compile Include="ViewModels\ClientSideLayoutViewModel.cs" />
+    <Compile Include="ViewModels\ClientSideProjectionPartEditViewModel.cs" />
+    <Compile Include="ViewModels\ClientSideSortCriterionViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\EditorTemplates\Parts\ClientSideProjectionPart.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
+    <Content Include="App_Data\Localization\ru-RU\orchard.module.po" />
     <Content Include="Placement.info" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Views\Admin\Edit.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\ClientSideFilters.Boolean.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
+    <Content Include="Views\ClientSideFilters.Enum.cshtml" />
+    <Content Include="Views\ClientSideFilters.Numeric.cshtml" />
+    <Content Include="Views\ClientSideSortCriterion.Default.cshtml" />
+    <Content Include="Views\EditorTemplates\Parts\ClientSideProjectionPart.cshtml" />
+    <Content Include="Views\Filter\Add.cshtml" />
+    <Content Include="Views\Filter\AddDefaultClientSide.cshtml" />
+    <Content Include="Views\Filter\Edit.cshtml" />
+    <Content Include="Views\Layout\Add.cshtml" />
+    <Content Include="Views\Layout\AddDefaultClientSide.cshtml" />
+    <Content Include="Views\Layout\Create.cshtml" />
+    <Content Include="Views\Layout\Edit.cshtml" />
     <Content Include="Views\Parts\ClientSideProjectionPart.Filters.cshtml" />
+    <Content Include="Views\Parts\ClientSideProjectionPart.Layouts.cshtml" />
+    <Content Include="Views\Parts\ClientSideProjectionPart.SortCriteria.cshtml" />
+    <Content Include="Views\Parts\ProjectionPart.Default.cshtml" />
+    <Content Include="Views\SortCriterion\Add.cshtml" />
+    <Content Include="Views\SortCriterion\AddDefaultClientSide.cshtml" />
+    <Content Include="Views\SortCriterion\Edit.cshtml" />
   </ItemGroup>
-  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

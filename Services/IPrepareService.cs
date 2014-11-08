@@ -97,22 +97,19 @@ namespace MainBit.Projections.ClientSide.Services
             // can change behavior of IProjectionManager that it result will be depended on the order of my custom position
             // or may add default sort criterion to last position and set default ordering to it different from none
             // in general need find a way to apply sort criteria in my custom order
-            var chanched = false;
             if (context.Part.SortCriteria.Any() && context.Part.SortCriteria.All(s => !s.ApplyingPosition.HasValue))
             {
-                chanched = true;
                 context.Part.SortCriteria[0].ApplyingOption = context.Part.SortCriteria[0].Options.FirstOrDefault();
                 // context.Part.SortCriteria[0].ApplyingPosition = 0;
             }
-            
+
+            if (context.Part.Layouts.Any() && context.Part.Layouts.All(s => !s.Applying))
+            {
+                context.Part.Layouts[0].Applying = true;
+            }
+
             context.Part.Filters.ForEach(f => f.Editor.BuildTokens(f, _tokenService));
             context.Part.SortCriteria.ForEach(f => f.Editor.BuildTokens(f, _tokenService));
-
-            if (chanched)
-            {
-                context.Part.SortCriteria[0].ApplyingOption = context.Part.SortCriteria[0].Options.FirstOrDefault();
-                // context.Part.SortCriteria[0].ApplyingPosition = null;
-            }
         }
     }
 

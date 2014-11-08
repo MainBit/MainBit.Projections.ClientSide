@@ -1,5 +1,6 @@
 ﻿using Orchard.Localization;
 using Orchard.Projections.Descriptors.SortCriterion;
+using Orchard.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,6 +58,22 @@ namespace MainBit.Projections.ClientSide.Providers.SortCriteria
             }
 
             return T(display, name, sFirstDirection);
+        }
+
+        public static SortDirection GetSortDirection(SortCriterionContext context, ITokenizer tokenizer)
+        {
+            var sSort = Convert.ToString(context.State.Sort);
+            sSort = tokenizer.Replace(sSort, new Dictionary<string, object>());
+            SortDirection sort;
+            if (Enum.IsDefined(typeof(SortDirection), sSort))
+            {
+                sort = (SortDirection)Enum.Parse(typeof(SortDirection), sSort);
+            }
+            else
+            {
+                sort = (SortDirection)Enum.Parse(typeof(SortDirection), Convert.ToString(context.State.SortUndefined));
+            }
+            return sort;
         }
 
         private static bool IsToken(string value)

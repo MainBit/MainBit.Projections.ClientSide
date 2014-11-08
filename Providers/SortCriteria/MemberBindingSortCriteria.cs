@@ -48,17 +48,7 @@ namespace MainBit.Projections.ClientSide.Providers.SortCriteria
 
         public void ApplyFilter(SortCriterionContext context, PropertyInfo property) {
 
-            var sSort = Convert.ToString(context.State.Sort);
-            sSort = _tokenizer.Replace(sSort, new Dictionary<string, object>());
-            SortDirection sort;
-            if (Enum.IsDefined(typeof(SortDirection), sSort))
-            {
-                sort = (SortDirection)Enum.Parse(typeof(SortDirection), sSort);
-            }
-            else
-            {
-                sort = (SortDirection)Enum.Parse(typeof(SortDirection), Convert.ToString(context.State.SortUndefined));
-            }
+            var sort = DisplayVariableSortCriterionHelper.GetSortDirection(context, _tokenizer);
 
             if (sort == SortDirection.None)
             {

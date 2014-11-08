@@ -1,20 +1,31 @@
 ﻿@using MainBit.Projections.ClientSide.Models.Filters;
 @{
     EnumClientSideFilter filter = Model.Filter;
+    var alwaysVisibilityCount = 5;
+    var hasHidingValues = filter.Items.Length > alwaysVisibilityCount;
+    var expandedClass = "expand"; // collapse
 }
-<fieldset class="client-side-filter enum">
+<fieldset class="client-side-filter enum @expandedClass">
     <label class="title"><span>@filter.DisplayName</span></label>
-    <div class="content">
+    <div class="content@(hasHidingValues ? " b-more-less less" : "")">
         <div class="values-container">
             @for (var i = 0; i < filter.Items.Length; i++)
             {
                 var item = filter.Items[i];
+                if (i + 1 == alwaysVisibilityCount)
+                {
+                @:</div>
+                @:<div class="values-container b-more-less__item less" style="display:none">
+                }
                 <div class="value-container choice">
-                    <input data-position="@i" type="checkbox" name="@filter.Name" value="@item.Id" @(item.Selected
-                        ? "checked=\"checked\"" : "") class="value" id="@filter.Name-@item.Id" />
-                    <label for="@filter.Name-@item.Id">@T(item.DisplayValue)</label>
+                    <input data-position="@i" type="checkbox" name="@filter.Name" value="@item.Id" @(item.Selected ? "checked=\"checked\"" : "") class="value" id="@filter.Name-@item.Id" />
+                    <label for="@filter.Name-@item.Id" class="forcheckbox">@T(item.DisplayValue)</label>
                 </div>
             }
         </div>
+        @if (hasHidingValues)
+        {
+            <div class="b-more-less__link less"><span data-other-text="@T("Less")">@T("More")</span></div>
+        }
     </div>
 </fieldset>

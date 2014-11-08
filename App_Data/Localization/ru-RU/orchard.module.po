@@ -1,0 +1,17 @@
+﻿msgid "More"
+msgstr "Еще"
+
+msgid "Less"
+msgstr "Свернуть"
+
+msgid "Sort by"
+msgstr "Сортировать по"
+
+msgid "Display as"
+msgstr "Показывать"
+
+msgid "Finding count:"
+msgstr "Найдено:"
+
+msgid "Show"
+msgstr "Показать"

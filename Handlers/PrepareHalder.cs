@@ -52,7 +52,6 @@ namespace MainBit.Projections.ClientSide.Handlers
             var prepareContext = new PrepareContext
             {
                 Part = part,
-                ProjectionPart = projectionPart,
                 Request = httpContext.Request
             };
 

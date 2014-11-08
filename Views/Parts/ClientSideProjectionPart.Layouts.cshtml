@@ -5,8 +5,11 @@
 }
 @if (layouts.Any())
 {
-    foreach (var layout in layouts)
-    {
-        <a href="@(layout.Url)" class="@(layout.Name.HtmlClassify())">@(layout.DisplayName)</a>
-    }
+    <div class="b-client-side-layouts">
+        <span class="title">@T("Display as")</span>
+        @foreach (var layout in layouts)
+        {
+        <a href="@(layout.Url)" class="@(layout.Name.HtmlClassify())@(layout.Applying ? " current" : "")">@(layout.DisplayName)</a>
+        }
+    </div>
 }

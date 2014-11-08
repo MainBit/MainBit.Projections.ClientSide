@@ -18,7 +18,7 @@
         {
             url = otherEntries.Url;
         }
-        classes = viewModel.ApplyingEntry.Direction.ToString().ToLower();
+        classes = "iconed current " + viewModel.ApplyingEntry.Direction.ToString().ToLower();
     }
 }
 @if (string.IsNullOrEmpty(url))

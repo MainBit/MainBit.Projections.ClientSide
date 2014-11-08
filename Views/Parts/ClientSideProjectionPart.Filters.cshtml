@@ -1,11 +1,14 @@
 ﻿@{
     Script.Require("MainBit.Projections.ClientSide");
     Style.Require("MainBit.Projections.ClientSide");
-    using(Script.Foot()) {
+    using (Script.Foot())
+    {
         <script type="text/javascript">
             var filters = @(Html.Raw(Model.FiltersJsonString.ToString()));
         </script>
     }
+
+    Model.List.Classes.Add("client-side-filters__list");
 }
 <form method="get" class="client-side-filters" action="@Model.ResultUrl" data-fast-search-url="@Model.FastSearchUrl">
     <input type="hidden" name="search" value="1" />
@@ -13,9 +16,8 @@
     <fieldset class="submit-button">
         <button type="submit" class="submit search text">@T("Search")</button>
     </fieldset>
-    <div class="fast-search-result initial">
+    <div class="fast-search-result">
         @T("Finding count:") <span class="count">@Model.Count</span>
         <a class="link" rel="nofollow" href="@Request.RawUrl">@T("Show")</a>
-        <span id="arrow"></span>
     </div>
 </form>

@@ -3,7 +3,7 @@
     var filterForm = $('.client-side-filters');
     var fastSearchUrl = filterForm.data('fast-search-url');
     var fastSearchResult = filterForm.find('.fast-search-result');
-    
+
     function GetQueryString() {
         var queryString = $.map(filters, function (item, key) { return item.value ? key + '=' + item.value : null }).join('&');
         queryString = 'search=1' + (queryString ? ('&' + queryString) : '');
@@ -24,7 +24,7 @@
         return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
     }
 
-    function DoFastSearch() {
+    function DoFastSearch(top) {
         if (fastSearchUrl) {
             var filtersQueryString = GetQueryString();
             $.ajax({
@@ -34,6 +34,7 @@
                 beforeSend: function (data) {
                     fastSearchResult.addClass('process');
                     fastSearchResult.removeClass('complete, success, error');
+                    fastSearchResult.css('top', top + 'px');
                 },
                 success: function (data) {
                     fastSearchResult.find('.count').html(data.count);
@@ -67,7 +68,7 @@
     var stoppedTyping;
     filterForm.find(':input').on('input change', function () {
         var _this = $(this);
-        
+
         var filterName = $(this).attr('name');
         var filter = filters[filterName];
         var filterControls = filterForm.find(':input[name=' + filterName + ']').sort(function (a, b) { return $(a).data('position') - $(b).data('position'); });
@@ -87,8 +88,9 @@
         // set a new timer to execute 3 seconds from last keypress
         stoppedTyping = setTimeout(function () {
             // code to trigger once timeout has elapsed
-            DoFastSearch();
-        }, 200); 
+            var top = _this.offset().top - filterForm.offset().top;
+            DoFastSearch(top);
+        }, 200);
     });
 
     filterForm.find('.client-side-filter.numeric').each(function () {
@@ -141,5 +143,28 @@
                 slider.slider("values", 1, value == "" ? maxValue : value);
             });
         }
+    });
+});
+
+$(function () {
+    $('.client-side-filter .b-more-less').each(function () {
+        var _this = $(this);
+        _this.find('.b-more-less__link').click(function () {
+            var item = _this.find('.b-more-less__item'),
+                link = $(this);
+
+            var otherLinkText = link.data("other-text");
+            link.data("other-text", link.html());
+            link.html(otherLinkText);
+
+            _this.add(link).add(item).toggleClass('more less');
+            item.slideToggle();
+        });
+    });
+
+    $('.client-side-filter.collapse .title, .client-side-filter.expand .title').click(function () {
+        var filter = $(this).closest('.client-side-filter');
+        filter.toggleClass('collapse expand');
+        filter.find('.content').slideToggle();
     });
 });

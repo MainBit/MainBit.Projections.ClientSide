@@ -181,6 +181,7 @@
     <Compile Include="Services\IClientSideProjectionTokensService.cs" />
     <Compile Include="Services\IClientSideSortService.cs" />
     <Compile Include="Services\ICurrentContentAccessor.cs" />
+    <Compile Include="Services\ILayoutService.cs" />
     <Compile Include="Services\IFilterService.cs" />
     <Compile Include="Services\IFilterValueRetriverProvider.cs" />
     <Compile Include="Services\IPrepareService.cs" />

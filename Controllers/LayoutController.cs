@@ -28,7 +28,9 @@ namespace MainBit.Projections.ClientSide.Controllers {
             IProjectionManager projectionManager,
             IRepository<LayoutRecord> repository,
             IQueryService queryService,
-            IClientSideLayoutEditorSelector clientSideLayoutEditorSelector) {
+            IClientSideLayoutEditorSelector clientSideLayoutEditorSelector,
+            ILayoutService layoutService)
+        {
             Services = services;
             _formManager = formManager;
             _projectionManager = projectionManager;
@@ -36,6 +38,7 @@ namespace MainBit.Projections.ClientSide.Controllers {
             _queryService = queryService;
             Shape = shapeFactory;
             _clientSideLayoutEditorSelector = clientSideLayoutEditorSelector;
+            _layoutService = layoutService;
         }
 
         public IOrchardServices Services { get; set; }
@@ -44,6 +47,7 @@ namespace MainBit.Projections.ClientSide.Controllers {
         private readonly IRepository<LayoutRecord> _repository;
         private readonly IQueryService _queryService;
         private readonly IClientSideLayoutEditorSelector _clientSideLayoutEditorSelector;
+        private readonly ILayoutService _layoutService;
         public Localizer T { get; set; }
         public dynamic Shape { get; set; }
 
@@ -314,6 +318,24 @@ namespace MainBit.Projections.ClientSide.Controllers {
             #endregion
 
             return View(model);
+        }
+
+        public ActionResult Move(string direction, int id, int queryId)
+        {
+            if (!Services.Authorizer.Authorize(Permissions.ManageQueries, T("Not authorized to manage queries")))
+                return new HttpUnauthorizedResult();
+
+            switch (direction)
+            {
+                case "up": _layoutService.MoveUp(id);
+                    break;
+                case "down": _layoutService.MoveDown(id);
+                    break;
+                default:
+                    throw new ArgumentException("direction");
+            }
+
+            return RedirectToAction("Edit", "Admin", new { id = queryId });
         }
     }
 }

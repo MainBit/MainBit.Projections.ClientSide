@@ -26,7 +26,7 @@ namespace MainBit.Projections.ClientSide.Services
                     FROM Orchard.ContentManagement.Records.ContentItemVersionRecord ItemVersion
                     JOIN ItemVersion.ContentItemRecord Item
                     JOIN Item.ClientSideProjectionPartRecord CsProjection
-                    JOIN Item.QueryPartRecord Query
+                    JOIN CsProjection.QueryPartRecord Query
                     WHERE ItemVersion.Published = true
                     AND Query.Id = :Query_Id
                     AND (:FiltersQueryString like '%' + CsProjection.PresetQueryString + '%' OR CsProjection.PresetQueryString is null);

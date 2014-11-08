@@ -152,7 +152,6 @@
     <Compile Include="FilterEditors\StringVariableEditor.cs" />
     <Compile Include="FilterEditors\VariableFilterFormater.cs" />
     <Compile Include="Handlers\ClientSideProjectionPartHandler.cs" />
-    <Compile Include="Handlers\PrepareHalder.cs" />
     <Compile Include="Handlers\PrepareHanlder.cs" />
     <Compile Include="Migrations.cs" />
     <Compile Include="Models\ClientSideProjectionPart.cs" />

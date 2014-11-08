@@ -82,7 +82,7 @@ namespace MainBit.Projections.ClientSide.Services
             }
 
             foreach(var item in parts) {
-                item.Record.Data = item.Infoset.Data;
+                item.Record.Data = part.Infoset.Data;
             }
         }
 

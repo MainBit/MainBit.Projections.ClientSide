@@ -89,6 +89,10 @@
       <Name>Orchard.Core</Name>
       <Private>False</Private>
     </ProjectReference>
+    <ProjectReference Include="..\Orchard.Fields\Orchard.Fields.csproj">
+      <Project>{3787dde5-e5c8-4841-bda7-dcb325388064}</Project>
+      <Name>Orchard.Fields</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Orchard.Forms\Orchard.Forms.csproj">
       <Project>{642a49d7-8752-4177-80d6-bfbbcfad3de0}</Project>
       <Name>Orchard.Forms</Name>
@@ -187,9 +191,12 @@
     <Compile Include="Services\IPresetService.cs" />
     <Compile Include="Services\IUrlService.cs" />
     <Compile Include="Services\QueryFromHelper.cs" />
+    <Compile Include="Storage\Providers\IStorageProviderSelector.cs" />
     <Compile Include="Storage\IStorage.cs" />
+    <Compile Include="Storage\Providers\EnumFieldStorageProvider.cs" />
     <Compile Include="Storage\Providers\InfosetStorageProvider.cs" />
     <Compile Include="Storage\Providers\IStorageProvider.cs" />
+    <Compile Include="Storage\TypedStorage.cs" />
     <Compile Include="Storage\SimpleStorage.cs" />
     <Compile Include="Tokens\ClientSideQueryTokens.cs" />
     <Compile Include="ViewModels\AdminIndexViewModel.cs" />

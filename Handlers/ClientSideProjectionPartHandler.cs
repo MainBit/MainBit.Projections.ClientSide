@@ -24,13 +24,13 @@ namespace MainBit.Projections.ClientSide.Handlers
 
         private readonly IClientSideFilterEditorSelector _clientSideFilterEditorSelector;
         private readonly IClientSideSortEditorSelector _clientSideSortCriterionEditorSelector;
-        private readonly IStorageProvider _storageProvider;
+        private readonly IStorageProviderSelector _storageProviderSelector;
         private readonly IProjectionManager _projectionManager;
 
         public ClientSideProjectionPartHandler(IRepository<ClientSideProjectionPartRecord> repository,
             IClientSideFilterEditorSelector clientSideFilterEditorSelector,
             IClientSideSortEditorSelector clientSideSortCriterionEditorSelector,
-            IStorageProvider storageProvider,
+            IStorageProviderSelector storageProviderSelector,
             IProjectionManager projectionManager)
         {
             Filters.Add(StorageFilter.For(repository));
@@ -38,7 +38,7 @@ namespace MainBit.Projections.ClientSide.Handlers
 
             _clientSideFilterEditorSelector = clientSideFilterEditorSelector;
             _clientSideSortCriterionEditorSelector = clientSideSortCriterionEditorSelector;
-            _storageProvider = storageProvider;
+            _storageProviderSelector = storageProviderSelector;
             _projectionManager = projectionManager;
 
 
@@ -83,7 +83,8 @@ namespace MainBit.Projections.ClientSide.Handlers
                     }
 
                     var name = ClientSideFilterFormHelper.GetName(state);
-                    var storage = _storageProvider.BindStorage(part, record.Category, record.Type);
+                    var storageProvider = _storageProviderSelector.GetProvider(record.Category, record.Type);
+                    var storage = storageProvider.BindStorage(part, record.Category, record.Type);
                     var filter = clientSideFilterEditor.Factory(storage, state, name, record.Description, descriptor.Category, descriptor.Type);
 
                     clientSideFilters.Add(filter);

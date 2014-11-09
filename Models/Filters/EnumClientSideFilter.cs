@@ -16,7 +16,7 @@ namespace MainBit.Projections.ClientSide.Models.Filters
             get {
                 if (_items == null)
                 {
-                    _items = DecodeValues(Storage.Get<string>());
+                    _items = DecodeValues(Storage.Get<object>());
                 }
                 return _items;
             }
@@ -36,13 +36,22 @@ namespace MainBit.Projections.ClientSide.Models.Filters
             return "{" + string.Join("},{", items.Select(v => v.DisplayValue).ToArray()) + "}";
         }
 
-        private EnumClientSideFilterItemEntry[] DecodeValues(string items) {
-            if(String.IsNullOrWhiteSpace(items)) {
-                return new EnumClientSideFilterItemEntry[0];
+        private EnumClientSideFilterItemEntry[] DecodeValues(object items)
+        {
+            var arItems = new string[0];
+
+            if (items is string[])
+            {
+                arItems = items as string[];
+            }
+            else if (items is string && !String.IsNullOrWhiteSpace(items.ToString()))
+            {
+                arItems = items.ToString().Split(separator, StringSplitOptions.RemoveEmptyEntries);
             }
 
             int index = 0;
-            return items.Split(separator, StringSplitOptions.RemoveEmptyEntries).Select(item => new EnumClientSideFilterItemEntry { 
+            return arItems.Select(item => new EnumClientSideFilterItemEntry
+            { 
                 DisplayValue = item,
                 Id = (++index).ToString(),
                 Selected = false

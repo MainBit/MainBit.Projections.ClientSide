@@ -66,11 +66,6 @@ namespace MainBit.Projections.ClientSide.Drivers
             var httpContext = _urlHepler.RequestContext.HttpContext;
             var currentUrl = _urlHepler.RequestContext.HttpContext.Request.RawUrl;
             
-            var knowingKeys = new List<string>();
-            part.Filters.ForEach(filter => knowingKeys.AddRange(filter.Editor.GetNames(filter)));
-            knowingKeys.Add(ClientSideSortService.QueryStringParamName);
-            knowingKeys.Add(ClientSideLayoutService.QueryStringParamName);
-
             var result = Combined(
                 ContentShape("Parts_ClientSideProjectionPart_Filters", shape =>
                 {
@@ -93,6 +88,11 @@ namespace MainBit.Projections.ClientSide.Drivers
 
                 ContentShape("Parts_ClientSideProjectionPart_SortCriteria", shape =>
                 {
+                    var knowingKeys = new List<string>();
+                    part.Filters.ForEach(filter => knowingKeys.AddRange(filter.Editor.GetNames(filter)));
+                    knowingKeys.Add(ClientSideSortService.QueryStringParamName);
+                    knowingKeys.Add(ClientSideLayoutService.QueryStringParamName);
+
                     var applyingOptions = part.SortCriteria
                         .Where(s => s.ApplyingPosition.HasValue)
                         .OrderBy(s => s.ApplyingPosition)
@@ -153,6 +153,11 @@ namespace MainBit.Projections.ClientSide.Drivers
                 }),
                 ContentShape("Parts_ClientSideProjectionPart_Layouts", shape =>
                 {
+                    var knowingKeys = new List<string>();
+                    part.Filters.ForEach(filter => knowingKeys.AddRange(filter.Editor.GetNames(filter)));
+                    knowingKeys.Add(ClientSideSortService.QueryStringParamName);
+                    knowingKeys.Add(ClientSideLayoutService.QueryStringParamName);
+
                     var viewModel = new List<ClientSideLayoutViewModel>();
 
                     var isFirstSort = true;
@@ -281,5 +286,7 @@ namespace MainBit.Projections.ClientSide.Drivers
 
             return Editor(part, shapeHelper);
         }
+    
+    
     }
 }

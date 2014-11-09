@@ -11,9 +11,18 @@ namespace MainBit.Projections.ClientSide.Storage.Providers
 {
     public class InfosetStorageProvider : IStorageProvider
     {
+        public int Priority
+        {
+            get { return -1; }
+        }
         public string ProviderName
         {
             get { return "Infoset"; }
+        }
+
+        public bool CanHandle(string filterCategory, string filterType)
+        {
+            return true;
         }
 
         public IStorage BindStorage(ClientSideProjectionPart part, string filterCategory, string filterType)

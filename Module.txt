@@ -6,4 +6,4 @@ Version: 1.0
 OrchardVersion: 1.8
 Description: Provides interface for client to filter and sort contents by parameters.
 Category: Content
-Dependencies: Orchard.Projections, Orchard.Forms, Orchard.Tokens
+Dependencies: Orchard.Projections, Orchard.Forms, Orchard.Tokens, Orchard.Fields

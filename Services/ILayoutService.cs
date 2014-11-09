@@ -1,8 +1,10 @@
-﻿using Orchard.Data;
+﻿using Orchard;
+using Orchard.Data;
 using Orchard.Projections.Models;
 using System.Linq;
 
-namespace Orchard.Projections.Services {
+namespace MainBit.Projections.ClientSide.Services
+{
     public interface ILayoutService : IDependency
     {
         void MoveUp(int sortId);

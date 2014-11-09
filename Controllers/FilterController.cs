@@ -17,6 +17,7 @@ using Orchard.Projections;
 using MainBit.Projections.ClientSide.ClientSideEditors.Filters;
 using System.Collections.Generic;
 using System;
+using MainBit.Projections.ClientSide.Services;
 
 namespace MainBit.Projections.ClientSide.Controllers {
     [ValidateInput(false), Admin]

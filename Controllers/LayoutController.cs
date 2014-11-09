@@ -17,6 +17,7 @@ using Orchard.UI.Notify;
 using Orchard;
 using Orchard.Projections;
 using MainBit.Projections.ClientSide.ClientSideEditors.Layouts;
+using MainBit.Projections.ClientSide.Services;
 
 namespace MainBit.Projections.ClientSide.Controllers {
     [ValidateInput(false), Admin]

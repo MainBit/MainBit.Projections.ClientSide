@@ -33,7 +33,7 @@
                 data: filtersQueryString,
                 beforeSend: function (data) {
                     fastSearchResult.addClass('process');
-                    fastSearchResult.removeClass('complete, success, error');
+                    fastSearchResult.removeClass('complete success error');
                     fastSearchResult.css('top', top + 'px');
                 },
                 success: function (data) {

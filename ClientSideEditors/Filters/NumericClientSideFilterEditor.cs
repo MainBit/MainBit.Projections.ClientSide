@@ -198,6 +198,8 @@ namespace MainBit.Projections.ClientSide.ClientSideEditors.Filters
 
             return dictionary;
         }
+    
+        
     }
 
     public static class NumericClientSideFilterExtensions

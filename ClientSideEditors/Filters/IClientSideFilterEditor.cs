@@ -38,7 +38,7 @@ namespace MainBit.Projections.ClientSide.ClientSideEditors.Filters
     {
         public virtual string DisplayName { get { return typeof(TClientSideFilter).Name; } }
         public virtual bool CanHandle(string filterEditorFormName, string clientSideType = null) { return false; }
-        public virtual void OnCreated(TClientSideFilter filter, dynamic state) { }
+        //protected virtual void OnCreated(TClientSideFilter filter, dynamic state) { }
         public virtual void OnFormBuilt(BuildingContext context, dynamic shapeHelper) { }
         public virtual IDictionary<string, string> BuildDefaultState(Orchard.Projections.Descriptors.Filter.FilterDescriptor descriptor) { return null; }
 
@@ -57,7 +57,7 @@ namespace MainBit.Projections.ClientSide.ClientSideEditors.Filters
                 Editor = this
             };
 
-            OnCreated(filter, state);
+            //OnCreated(filter, state);
 
             return filter;
         }

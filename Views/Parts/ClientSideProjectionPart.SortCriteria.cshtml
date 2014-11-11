@@ -1,4 +1,6 @@
-﻿<div class="b-client-side-sort">
+﻿@if (Model.List.Items.Any()) {
+<div class="b-client-side-sort">
     <span class="title">@T("Sort by")</span>
     @Display(Model.List)
 </div>
+}

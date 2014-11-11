@@ -157,7 +157,7 @@
     background: #ebebeb;
    
 }
-.ui-slider { /* to show a zone whitch will be able for clicking by user to apply filters */
+.client-side-filter.numeric .slider, .ui-slider { /* to show a zone whitch will be able for clicking by user to apply filters */
     position: relative;
 
     margin-right: 10px; /* width of ui-slider-handle */

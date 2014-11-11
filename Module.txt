@@ -4,6 +4,10 @@ Author: The MainBit Team
 Website: http://mainbit.com
 Version: 1.0
 OrchardVersion: 1.8
-Description: Provides interface for client to filter and sort contents by parameters.
-Category: Content
-Dependencies: Orchard.Projections, Orchard.Forms, Orchard.Tokens, Orchard.Fields
+Description: Description for the module
+Features:
+	MainBit.Projections.ClientSide:
+		Name: Client Side Projector
+		Description: Provides interface for client to filter and sort contents by parameters
+		Dependencies: Orchard.Projections, Orchard.Forms, Orchard.Tokens, Orchard.Fields
+		Category: Content

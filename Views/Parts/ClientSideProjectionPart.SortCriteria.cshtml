@@ -1,4 +1,8 @@
-﻿@if (Model.List.Items.Any()) {
+﻿@{
+    List<MainBit.Projections.ClientSide.ViewModels.ClientSideSortCriterionViewModel> viewModel = Model.ViewModel;
+}
+@if (viewModel.Any())
+{
 <div class="b-client-side-sort">
     <span class="title">@T("Sort by")</span>
     @Display(Model.List)

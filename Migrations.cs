@@ -15,6 +15,7 @@ namespace MainBit.Projections.ClientSide
         {
             ContentDefinitionManager.AlterPartDefinition(typeof(ClientSideProjectionPart).Name, part => part
                 .Attachable()
+                .WithDescription("Provides a client side filters, sort, layouts.")
                 );
 
             SchemaBuilder.CreateTable("ClientSideProjectionPartRecord",

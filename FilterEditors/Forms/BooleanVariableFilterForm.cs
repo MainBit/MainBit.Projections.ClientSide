@@ -103,7 +103,7 @@ namespace MainBit.Projections.ClientSide.FilterEditors.Forms
                 if (!Boolean.TryParse((string)value, out bComparisonValue))
                 {
                     decimal dComparisonValue;
-                    if (Decimal.TryParse(value, NumberStyles.None, CultureInfo.InvariantCulture, out dComparisonValue))
+                    if (Decimal.TryParse(value, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out dComparisonValue))
                     {
                         bComparisonValue = Convert.ToBoolean(dComparisonValue);
                     }

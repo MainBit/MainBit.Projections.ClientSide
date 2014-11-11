@@ -68,7 +68,7 @@ namespace MainBit.Projections.ClientSide.ClientSideEditors.Filters
         {
             decimal outer;
 
-            if (Decimal.TryParse(queryString[filter.GetNameFrom()], NumberStyles.None, CultureInfo.InvariantCulture, out outer))
+            if (Decimal.TryParse(queryString[filter.GetNameFrom()], NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out outer))
             {
                 filter.From = outer;
             }
@@ -76,7 +76,7 @@ namespace MainBit.Projections.ClientSide.ClientSideEditors.Filters
                 filter.From = null;
             }
 
-            if (Decimal.TryParse(queryString[filter.GetNameTo()], NumberStyles.None, CultureInfo.InvariantCulture, out outer))
+            if (Decimal.TryParse(queryString[filter.GetNameTo()], NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out outer))
             {
                 filter.To = outer;
             }

@@ -101,14 +101,14 @@ namespace MainBit.Projections.ClientSide.FilterEditors.Forms
             Action<IHqlExpressionFactory> minPredicate = null, maxPredicate = null;
             if (opMin != NumericOperator.Ignored)
             {
-                if (formState.Min != null && decimal.TryParse(formState.Min.ToString(), NumberStyles.None, CultureInfo.InvariantCulture, out outer))
+                if (formState.Min != null && decimal.TryParse(formState.Min.ToString(), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out outer))
                 {
                     minPredicate = GetFilterPredicate(opMin, property, outer);
                 }
             }
             if (opMax != NumericOperator.Ignored)
             {
-                if (formState.Max != null && decimal.TryParse(formState.Max.ToString(), NumberStyles.None, CultureInfo.InvariantCulture, out outer))
+                if (formState.Max != null && decimal.TryParse(formState.Max.ToString(), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out outer))
                 {
                     maxPredicate = GetFilterPredicate(opMax, property, outer);
                 }

@@ -140,12 +140,15 @@
 
 
 /* filters - numeric */
+.client-side-filter.numeric .value {
+    max-width: 100px;
+}
 .slider-container {
     position: relative;
 
     margin-bottom: 0.3em;
 }
-.empty-line { /* to show a filter line outside current filtered value zone ( ) */
+.slider-container .empty-line { /* to show a filter line outside current filtered value zone ( ) */
     position:absolute;
     width:100%;
 
@@ -154,7 +157,7 @@
     background: #ebebeb;
    
 }
-.slider, .ui-slider { /* to show a zone whitch will be able for clicking by user to apply filters */
+.ui-slider { /* to show a zone whitch will be able for clicking by user to apply filters */
     position: relative;
 
     margin-right: 10px; /* width of ui-slider-handle */

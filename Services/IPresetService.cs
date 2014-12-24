@@ -29,7 +29,7 @@ namespace MainBit.Projections.ClientSide.Services
                     JOIN CsProjection.QueryPartRecord Query
                     WHERE ItemVersion.Published = true
                     AND Query.Id = :Query_Id
-                    AND (:FiltersQueryString like '%' + CsProjection.PresetQueryString + '%' OR CsProjection.PresetQueryString is null);
+                    AND (:FiltersQueryString like CONCAT('%', CsProjection.PresetQueryString, '%') OR CsProjection.PresetQueryString is null);
                     ORDER BY LENGTH(CsProjection.PresetQueryString) DESC
                     TAKE 1";
 

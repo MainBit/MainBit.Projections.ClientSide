@@ -31,7 +31,8 @@ namespace MainBit.Projections.ClientSide.Drivers
         private readonly IClientSideLayoutService _clientSideLayoutService;
         private readonly IUrlService _urlService;
         private readonly IRepository<QueryPartRecord> _queryRepository;
-        
+        private readonly IPrepareService _prepareService;
+
         public ClientSideProjectionPartDriver(
             IOrchardServices services,
             IProjectionManager projectionManager,
@@ -39,7 +40,9 @@ namespace MainBit.Projections.ClientSide.Drivers
             IClientSideSortService clientSideSortService,
             IClientSideLayoutService clientSideLayoutService,
             IUrlService urlService,
-            IRepository<QueryPartRecord> queryRepository)
+            IRepository<QueryPartRecord> queryRepository,
+            IPrepareService prepareService
+            )
         {
 
             _projectionManager = projectionManager;
@@ -48,7 +51,8 @@ namespace MainBit.Projections.ClientSide.Drivers
             _clientSideLayoutService = clientSideLayoutService;
             _urlService = urlService;
             _queryRepository = queryRepository;
-            
+            _prepareService = prepareService;
+
 
             T = NullLocalizer.Instance;
             Logger = NullLogger.Instance;
@@ -63,6 +67,8 @@ namespace MainBit.Projections.ClientSide.Drivers
 
         protected override DriverResult Display(ClientSideProjectionPart part, string displayType, dynamic shapeHelper)
         {
+            PrepareClientSide(part, displayType);
+
             var httpContext = _urlHepler.RequestContext.HttpContext;
             var currentUrl = _urlHepler.RequestContext.HttpContext.Request.RawUrl;
             
@@ -220,6 +226,29 @@ namespace MainBit.Projections.ClientSide.Drivers
 
             return Combined(result, displayMethodResult);
         }
+
+        private void PrepareClientSide(ClientSideProjectionPart part, string displayType)
+        {
+            if(displayType != "Detail")
+            {
+                return;
+            }
+
+            var httpContext = Services.WorkContext.HttpContext;
+
+            var prepareContext = new PrepareContext
+            {
+                Part = part,
+                Request = httpContext.Request
+            };
+
+            _prepareService.Prepare(prepareContext);
+            if (prepareContext.ResultUrl != httpContext.Request.RawUrl)
+            {
+                httpContext.Items["ClientSideProjectionRedirectUrl"] = prepareContext.ResultUrl;
+            }
+        }
+
         protected override DriverResult Editor(ClientSideProjectionPart part, dynamic shapeHelper)
         {
             return ContentShape("Parts_ClientSideProjection_Edit", () =>

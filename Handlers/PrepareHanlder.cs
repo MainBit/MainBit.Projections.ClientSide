@@ -26,7 +26,16 @@ namespace MainBit.Projections.ClientSide.Handlers
             _prepareService = prepareService;
             _wca = wca;
 
-            OnGetDisplayShape<ClientSideProjectionPart>(NotGoodPlaceForThisFuntion);
+
+            // doesnt work because
+            // ContentPartDriverCoordinator - executes Display for Part Driver (in BuildDisplay method inherited from ContentHandlerBase)
+            // ContentHandler (this class) - executes OnGetDisplayShape filter in BuildDisplay
+            // both class inherited from IContentHandler and executes in wrong sequnce
+
+            //OnGetDisplayShape<ClientSideProjectionPart>(NotGoodPlaceForThisFuntion);
+            //OnGetDisplayShape<ProjectionPart>((context, part) => {
+            //    NotGoodPlaceForThisFuntion(context, part.As<ClientSideProjectionPart>());
+            //});
         }
 
 
